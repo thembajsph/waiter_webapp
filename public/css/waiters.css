@@ -1,0 +1,33 @@
+.form-group {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; 
+    
+}
+
+.form-control{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; 
+
+}
+
+ .formGroupExampleInput {
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; 
+
+
+} 
+
+.smith {
+    color : white
+  }
+
+

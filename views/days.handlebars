@@ -1,0 +1,54 @@
+<div class="row center">
+
+<div class="center">
+<h1 >WAITERS LIST</h1>
+
+
+<div>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Name</th>
+			<th scope="col">Day of Booking</th>
+			<th scope="col">Time for Booking</th>
+			<th scope="col">Ticket Number</th>
+
+		</tr>
+	</thead>
+	<tbody>
+		{{#each bookings}}
+		<tr>
+			<th scope="row">{{id}}</th>
+			<td>{{this.name}}</td>
+			<td>{{this.day}}</td>
+			<td>{{this.timeOfGreets}}</td>
+			<td>
+				<a class="btn btn-primary" href="/confirm/{{id}}">View</a>
+			</td>
+		</tr>
+		{{/each}}
+
+	</tbody>
+</table>
+
+
+
+
+
+</div>
+
+
+
+<div>
+
+{{!-- {{#each name}}
+<a href="/counter/{{this.name}}">
+    <li>{{this.name}}</li>
+</a>
+{{/each}} --}}
+
+</div>
+
+<button class='back' type="button" name="link"><a href="/">Back</a></button>
