@@ -65,7 +65,7 @@ app.get("/", async function (req, res) {
   try {
 
 
-    res.render("index", {
+    res.render("home", {
 
       title: "Home"
 
@@ -82,7 +82,7 @@ app.get("/", async function (req, res) {
 
 });
 
-app.post("/waiters", async function (req, res) {
+app.get("/waiters", async function (req, res) {
 
   res.render("index", {
 
@@ -90,23 +90,21 @@ app.post("/waiters", async function (req, res) {
 });
 
 
-
-
-
-
-
 app.get("/waiters/:userName", async function (req, res) {
 
 
   try {
     const userName = await req.params.userName;
+   // console.log(userName)
 
+  
     //const waiterNames = await instance.createShift(userName)
     // const daysSelect = await instance.daysSelected()
 
-    render("index", {
+    res.render("index", {
 
-      userName
+      userName,
+     
 
     });
 
@@ -122,42 +120,27 @@ app.get("/waiters/:userName", async function (req, res) {
 });
 
 
-
-
-
-
 app.post("/waiters/:userName", async function (req, res) {
 
   try {
     const { days, userName } = await req.body;
     //const userName = await req.params.userName;
+  
+    //console.log({ userName });
 
-    console.log(userName);
+    //console.log({ days });
 
-    console.log(days);
+    // check if name and days are defined
 
-    // var newDays = []
-    //newDays.push(days)
-    //newDays.push(days[i])
-
-    // using a for loop 
-    for (let i = 0; i < days.length; i++) {
-
-      //console.log(days[i]);
-
-      
-      const storeAwaydays = await instance.selectDayShift(days[i]);
-     // const storeAwayBoth = await instance.insertBoth(userName, days[i]);
-
-
-      
-    }
-    const storeAwayNames = await instance.createNameShift(userName);
-    // i want the individual day after looping in my parameter
+    const results = await instance.wf(userName, days);
+    //console.log({ results });
+    const dayOfWeeks = await instance.dayTogether( days);
+console.log(dayOfWeeks)
 
     res.render("index", {
 
-      //  names: storeAway , storeAwayNames, storeAwayBoth
+      allNames: results,
+      weekDays: dayOfWeeks
 
     });
 
@@ -172,23 +155,27 @@ app.post("/waiters/:userName", async function (req, res) {
 
 
 
-
+});
 
 
   app.get("/days", async function (req, res) {
+
     try {
-
-
 
       // //want to send the call and sms to my factort function
       // settingsBill.recordAction(req.body.actionType);
+    const listOfNames = await  instance.listOfDaysAndNamesObject();
+    
+   console.log(listOfNames[1].waiters)
+      res.render("days", { 
 
-
-      res.render("days", {
+       list: listOfNames,
+      
 
         // actions: actionLists2 
 
       });
+
     } catch (error) {
       console.log(error.name);
       console.log(error.message);
@@ -197,6 +184,7 @@ app.post("/waiters/:userName", async function (req, res) {
 
 
   });
+
   app.get("/reset", async function (req, res) {
 
     try {
@@ -213,9 +201,9 @@ app.post("/waiters/:userName", async function (req, res) {
   });
 
 
-});
 
-const PORT = process.env.PORT || 3055
+
+const PORT = process.env.PORT || 3046
 
 app.listen(PORT, function () {
   console.log("app started at port:", PORT);
@@ -267,5 +255,5 @@ app.listen(PORT, function () {
     // const storeAway = instance.createShift(userName, value)
 
 
-
+    // console.log(listOfNames[1].waiters)
 

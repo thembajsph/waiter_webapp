@@ -34,7 +34,6 @@ Insert into weekly_days(days_bookings)
 
 Insert into weekly_days(days_bookings)
  values ('Thursday');
-
 Insert into weekly_days(days_bookings)
  values ('Friday');
 
@@ -93,6 +92,12 @@ values(1, 2);
 -- (11 rows)
 
 
+-- select waiters_names.names as name from waiters_names
+--  join waiters_shifts   
+--    on waiters_shifts.waiters_id = waiters_names.id
+--  join  weekly_days
+--  on waiters_shifts.days_id = weekly_days.id
+--  where weekly_days.id=1
 
 
 
@@ -121,3 +126,4 @@ values(1, 2);
 
 
 
+-- select * from waiters_shifts join weekly_days on waiters_shifts.days_id = weekly_days.id join waiters_names on waiters_shifts.waiters_id = waiters_names.id;

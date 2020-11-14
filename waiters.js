@@ -1,246 +1,193 @@
 module.exports = function waiters(pool) {
 
-
-    async function createNameShift(name) {
-
-        if (name !== "") {
-
-            const selectQuery = await pool.query('SELECT names FROM waiters_names WHERE names = $1', [name])
-            // if the name is not there insert the name in the table
-
-            let insertNameQ
-            if (selectQuery.rowCount === 0) {
-
-                insertNameQ = await pool.query('INSERT INTO waiters_names values($1)', [name])
-
-                //if it inside the database
-
-                // if (insertNameQ > 0) {
-
-                //     let selectIdQ;
-
-                //     selectIdQ = await pool.query('SELECT id FROM waiters_names WHERE names = $1', [name])
-
-                //     return selectIdQ.rows[0].id
-                //    let newNameId = selectIdQ.rows[0].id
-                // }
-
-
-            } else {
-
-                return false;
-            }
-        } else {
-
-            return false;
-        }
-
-    }
-
-
-
-    async function selectDayShift(day) {
-        // check days the return id
-
-        let selectQueryDays;
-
-        selectQueryDays = await pool.query('SELECT days_bookings FROM weekly_days WHERE days_bookings = $1', [day])
-        // console.log(selectQueryDays)
-        //if it inside the database
-
-
-        if (selectQueryDays.rowCount > 0) {
-
-            let selectIdQdays;
-
-            selectIdQdays = await pool.query('SELECT id FROM weekly_days WHERE days_bookings = $1', [day])
-
-            return selectIdQdays.rows[0].id
-            newDaysId = selectIdQdays.rows[0].id;
-        }
-
-    }
-
-
-
-//     async function insertBoth(name, day) {
-
-//         const selectQuery = await pool.query('SELECT * FROM waiters_shifts')
-//         // if the name is not there insert the name in the table
-
-
-//         let selectIdQ;
-
-//         selectIdQ = await pool.query('SELECT id FROM waiters_names WHERE names = $1', [name])
-
-//         //console.log(selectIdQ.rows[0].id);
-
-//          newNameId = selectIdQ.rows[0].id
-
-
-//         selectIdQdays = await pool.query('SELECT id FROM weekly_days WHERE days_bookings = $1', [day])
-
-//        // console.log(selectIdQdays.rows[0].id)
-//          newDaysId = selectIdQdays.rows[0].id;
-// console,log(newDaysId)
-//         if (selectQuery.rowCount === 0) {
-
-//             insertQuery = await pool.query('INSERT INTO  waiters_shifts(days_id, waiters_id)  values ($1,$2)', [newNameId, newDaysId])
-
-//         } else {
-
-//             return false;
-
-//         }
-
-
-   // };
-
-    // await pool.query('INSERT INTO  foreign_keys (reg_numbers ,town_id  ) values($1,$2)', [reg, codeId])
-    // ait pool.query('SELECT id FROM town_names WHERE town_code  = $1', [string])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //                 // if (insertNameQ && insertNameQdays > 0) {
-
-    // let insertQuery;
-
-    //                 } else {
-
-    //                     return false;
-    //                 }
-    //             } else {
-
-    //                 return false;
-    //             }
-
-    // } else {
-
-    //     return false;
-
-    // }
-
-
-
-
-    // if the name is not there insert the name in the table
-
-    // let insertNameQdays;
-    // if (selectQueryDays.rowCount === 0) {
-
-    //     insertNameQdays = await pool.query('INSERT INTO weekly_days (days_bookings) values($1)', [day])
-
-    // } else {
-
-    //     return false
-    // }
-
-
-
-
-
-
-
-
-    //console.log(selectQuery);
-    // now we must select the right id for our registrations
-
-    // console.log({ day })
-
-    //console.log({ selectQuery });
-
-    //     let codeId = selectQuery.rows[0].id
-
-    //     console.log(codeId)
-
-    //     //to check if its a database
-    //     let ifExists;
-
-    //     if (codeId > 0) {
-
-    //         ifExists = await pool.query('select id from weekly_days WHERE days_bookings = $1', [day])
-
-    //         console.log({ ifExists });
-    //         // return ifExists.rows.id
-    //     }
-
-    //     else {
-
-    //         return false;
-
-    //     }
-    //     //now if if doesnt in the database , you want to insert registrations and the id
-    //     let insertQuery;
-    //     if (ifExists.rows.length < 1) {
-
-    //         insertQuery = await pool.query('INSERT INTO  waiters_shifts (days_id ,waiters_id   ) values($1,$2)', [day, name])
-
-    //     } else {
-
-    //         return false
-    //     }
-
-    // } else {
-
-    //     return false
-    // }
-
-
-
-
-
-
-    async function joinedBack(day) {
-
-        // const joined = await pool.query('SELECT week_days.days, waiters_names.names From week_days INNER JOIN waiters_names ON week_days.id = waiters_names.id);
-
-
-        //     const daysSelectQuery = await pool.query('SELECT id FROM week_days WHERE days = $1', [day])
-        //     // now we must select the right id for our registrations
-        //     // console.log({ day })
-        //     console.log({ daysSelectQuery });
-
-        //     return daysSelectQuery.rows.id
+    /**
+        * Workflow
+        * 1 - search for the user 
+        * 2 - get their id -> delete all in shift
+        * 3 - insert to the shift new ids
+        * 4 - query * days selected return their ids with state: disable
+        * 5 - {name: Thur, id: 5, state: checked}
+        */
+
+    async function addUser(name) {
+
+        await pool.query('INSERT INTO waiters_names (names) values ($1)', [name])
 
     };
+
+    const wf = async (name, days_id) => {
+
+
+        var userId = await getIdOfUser(name)
+        // console.log({ userId })
+
+        // if its true get id of user
+        if (userId) {
+
+            // delete from all shift if its user is  there
+            await deleteAllShift(userId)
+
+            // then add new shift add days_id and userID
+            await addNewShift(days_id, userId)
+
+        }
+
+        //return get all shift with all the shifts in a table
+        return await getAllShift();
+
+
+    };
+
+    async function searchUser(name) {
+        const selectQuery = await pool.query('SELECT names FROM waiters_names WHERE names = $1', [name])
+        return selectQuery.rows[0];
+
+    };
+
+    const dontReturnMe = async (name) => {
+        await addUser(name);
+        const selectIdQ = await pool.query('SELECT id FROM waiters_names WHERE names = $1', [name])
+        return selectIdQ.rows[0].id
+    }
+
+    async function getIdOfUser(name) {
+        try {
+            const selectIdQ = await pool.query('SELECT id FROM waiters_names WHERE names = $1', [name])
+
+            return selectIdQ.rows[0].id
+        } catch (error) {
+            return await dontReturnMe(name)
+        }
+
+    };
+
+    async function deleteAllShift(id) {
+        await pool.query('delete from waiters_shifts where waiters_id = $1', [id])
+    };
+
+    async function insertNewNameId(name) {
+
+        await pool.query('INSERT INTO waiters_shifts (waiters_id) values ($1)', [name])
+
+    };
+
+
+    async function insertNewDaysId(days_id, names_id) {
+
+        await pool.query('INSERT INTO waiters_shifts (days_id, waiters_id) values ($1,$2)', [days_id, names_id])
+
+    };
+
+    /**
+     * 
+     * @param {Array} days_id - user selected days
+     * @param {Integer} names_id 
+     * 
+     * @returns nothing
+     */
+
+
+    async function addNewShift(days_id, names_id) {
+        // console.log(days_id);
+
+        //array not a function
+
+        await days_id.forEach(async (id) => {
+
+            await insertNewDaysId(id, names_id)
+
+
+        });
+
+    };
+
+    async function getAllShift() {
+
+        const selectIdQ = await pool.query('SELECT * FROM waiters_shifts')
+        // console.log(selectIdQ.rows[0].id)
+        return selectIdQ.rows;
+
+    };
+
+    async function allDayChecked() {
+
+        // - query * days selected return their ids with state: disable
+        // *  - {name: Thur, id: 5, state: checked}
+
+    };
+
+
+
+    async function waitersDayOneDay() {
+
+        let specificDay = await pool.query(`select * from waiters_names
+    join waiters_shifts   
+      on waiters_shifts.waiters_id = waiters_names.id
+    join  weekly_days
+    on waiters_shifts.days_id = weekly_days.id`
+        )
+        //console.log(specificDay.rows)
+        return specificDay.rows;
+    };
+
+    async function listOfDaysAndNamesObject() {
+
+        const results = await pool.query('select * from  weekly_days')
+
+        const weekdays = results.rows
+        const shift = await waitersDayOneDay()
+        //console.log(daysRow)
+
+        weekdays.forEach(async function (day) {
+            day.waiters = [];
+            shift.forEach(waiter => {
+                if (day.days_bookings === waiter.days_bookings) {
+                    day.waiters.push(waiter)
+                }
+            });
+
+
+        });
+
+        return weekdays;
+
+    }
+
+
+    async function dayTogether() {
+
+        const results = await pool.query('select * from  weekly_days')
+
+        return results.rows;
+
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    async function checkedDay() {
+
+
+
+
+
+
+
+
+    }
 
     async function resetFtn() {
 
@@ -272,46 +219,38 @@ module.exports = function waiters(pool) {
 
     };
 
-
-
     return {
 
-        //enterNames,
-        // daysSelected,
-        //restartFunct,
-        joinedBack,
+        searchUser,
+        getIdOfUser,
+        deleteAllShift,
+        getAllShift,
+        insertNewNameId,
+        insertNewDaysId,
+        allDayChecked,
+        waitersDayOneDay,
         resetFtn,
         buttonMsg,
         similar,
-        createNameShift,
-        selectDayShift,
-       // insertBoth
-
-
-
-
+        wf,
+        addUser,
+        addNewShift,
+        listOfDaysAndNamesObject,
+        dayTogether
     }
 
 };
 
 
 
-//now if if doesnt in the database , you want to insert registrations and the id
+    //     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    // ];
 
-    //         if (ifExists.rows.length < 1) {
 
-    //             await pool.query('INSERT INTO  foreign_keys (days_id ,waiters_id   ) values($1,$2)', [day, name])
 
-    //         } else {
 
-    //             return false
-    //         }
 
-    //     } else {
 
-    //         return false
-    //     }
-    // };
 
 
 
@@ -331,109 +270,3 @@ module.exports = function waiters(pool) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// async function restartFunct(day) {
-
-    //     // // if (name !== "") {
-
-    //     // const daysSelectQuery = await pool.query('SELECT id FROM week_days WHERE days = $1', [day])
-    //     // // now we must select the right id for our registrations
-    //     // // console.log({ day })
-    //     // console.log({ daysSelectQuery });
-
-    //     // return daysSelectQuery.rows.id
-
-    // };
-
-
-
-
-
-
-    //             let codeId = selectQuery.rows[0].id
-    //             console.log({ codeId });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //             //to check if its a database
-    //             let ifExists;
-
-    //             if (codeId > 0) {
-
-    //                 ifExists = await pool.query('SELECT id FROM  waiters_names where  = ($1)', [name])
-
-    //             console.log({ ifExists });       
-    // // return ifExists.rows.id
-    //             }
-
-    //             else {
-
-    //                 return false;
-
-    //             }
-
-    //             async function enterNames(name, day) {
-
-
-
-
-
-    //             }
-
-
-
-    //         //now if if doesnt in the database , you want to insert registrations and the id
-
-    //         if (ifExists.rows.length < 1) {
-
-    //             await pool.query('INSERT INTO  foreign_keys (days_id ,waiters_id   ) values($1,$2)', [day, name])
-
-    //         } else {
-
-    //             return false
-    //         }
-
-    //     } else {
-
-    //         return false
-    //     }
-    // };

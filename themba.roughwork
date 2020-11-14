@@ -449,3 +449,250 @@ values(1, 2);
 --  Thursday  | Hloni
 --  Friday    | Tello
 -- (5 rows)
+
+
+
+	<div>
+						
+						{{#each weekDays}}
+
+						<input type="checkbox" name="{{this.days_bookings}}" value="{{this.id}}" class="form-check"
+							checked>
+
+						<span>{{this.days_bookings}}</span>
+						{{/each}}
+					</div>
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = function waiters(pool) {
+
+    // - search for the user
+    async function createNameShift(name) {
+
+        if (name !== "") {
+
+            const selectQuery = await pool.query('SELECT names FROM waiters_names WHERE names = $1', [name])
+            // if the name is not there insert the name in the table
+            // console.log(selectQuery.rowCount)
+
+            let insertNameQ
+            if (selectQuery.rowCount === 0) {
+
+                insertNameQ = await pool.query('INSERT INTO waiters_names (names) values ($1)', [name])
+
+                //if it inside the database
+
+                if (insertNameQ > 0) {
+
+                    let selectIdQ;
+
+                    selectIdQ = await pool.query('SELECT id FROM waiters_names WHERE names = $1', [name])
+
+                    console.log(selectIdQ.rows[0].id)
+                    return selectIdQ.rows[0].id
+                    //let newNameId = selectIdQ.rows[0].id
+                }
+
+
+            } else {
+
+                return false;
+            }
+        } else {
+
+            return false;
+        }
+
+    }
+
+
+
+    async function selectDayShift(day) {
+        // check days the return id
+
+        let selectQueryDays;
+
+        selectQueryDays = await pool.query('SELECT days_bookings FROM weekly_days WHERE id = $1', [day])
+       //  console.log(selectQueryDays.rows[0].days_bookings)
+        //if it inside the database
+
+
+        if (!(selectQueryDays.rows[0].days_bookings == undefined)) {
+
+            let selectIdQdays;
+
+            selectIdQdays = await pool.query('SELECT id FROM weekly_days WHERE days_bookings = $1', [selectQueryDays.rows[0].days_bookings])
+           // console.log(selectIdQdays.rows[0].id)
+
+            return selectIdQdays.rows[0].id
+            // newDaysId = selectIdQdays.rows[0].id;
+        }
+
+    }
+
+
+    /**
+     * Workflow
+     *  - search for the user 
+     *  - get their id -> delete all in shift
+     *  - insert to the shift new ids
+     *  - query * days selected return their ids with state: disable
+     *  - {name: Thur, id: 5, state: checked}
+     */
+
+
+
+    async function insertBoth(name, day) {
+
+        const selectQuery = await pool.query('SELECT * FROM waiters_shifts')
+        // if the name is not there insert the name in the table
+
+
+        let selectIdQ = await pool.query('SELECT id FROM waiters_names WHERE names = $1', [name])
+
+         console.log(selectIdQ.rows[0].id);
+
+        let newNameId = selectIdQ.rows[0].id
+
+
+        let selectIdQdays = await pool.query('SELECT id FROM weekly_days WHERE days_bookings = $1', [day])
+
+        //  console.log(selectIdQdays.rows[0].id)
+
+        let newDaysId = selectIdQdays.rows[0].id;
+
+
+
+        // console.log(newDaysId)
+        if (selectQuery.rowCount === 0) {
+
+            insertQuery = await pool.query('INSERT INTO  waiters_shifts(days_id, waiters_id) values ($1,$2)', [newNameId, newDaysId])
+            //console.log(newNameId)
+
+        } else {
+
+            return false;
+
+        }
+
+
+    };
+
+
+
+
+
+     async function createNameShift(name) {
+
+        if (name !== "") {
+
+            const selectQuery = await pool.query('SELECT names FROM waiters_names WHERE names = $1', [name])
+            // if the name is not there insert the name in the table
+            // console.log(selectQuery.rowCount)
+
+            let insertNameQ
+            if (selectQuery.rowCount === 0) {
+
+                insertNameQ = await pool.query('INSERT INTO waiters_names (names) values ($1)', [name])
+
+                //if it inside the database
+
+                if (insertNameQ > 0) {
+
+                    let selectIdQ;
+
+                    selectIdQ = await pool.query('SELECT id FROM waiters_names WHERE names = $1', [name])
+
+                    console.log(selectIdQ.rows[0].id)
+                    return selectIdQ.rows[0].id
+                    //let newNameId = selectIdQ.rows[0].id
+                }
+
+
+            } else {
+
+                return false;
+            }
+        } else {
+
+            return false;
+        }
+
+    }
+
+
+   
+	<form action="/days" method="get">
+	<div class="row">
+	<table class=" table table-bordered text-light">
+		<thead>
+
+			<tr scope="col-3">
+				{{!-- {{#if}} --}}
+
+				{{#each days}}
+
+{{!-- 
+{{#each counter}} --}}
+
+{{!-- {{#each waiterCount}} --}}
+				<th scope="col" class={{this.color}}> 
+	
+					{{this.dayname}}
+
+				
+					{{/each}}
+				</th>
+
+
+			</tr>
+
+		</thead>
+		<tbody>
+			<tr>
+
+				{{#each days}}
+
+				<td scope="col">
+					{{#each waiters}}
+					<li>{{this.name}}</li>
+
+					{{/each}}
+
+				</td>
+
+				{{/each}}
+
+			</tr>
+
+		</tbody>
+
+	</table>
+	</div>
+
+
+
+  day.waiters = waiters;
+            day.count = waiters.length;
+            // var waiterCount
+            // var waiterCount = day.waiters.length
+            // console.log(waiterCount)
+            if (day.count < 3) {
+                day.color = 'bg-danger'
+            }
+         else   if (day.count > 3) {
+                day.color = 'bg-warning'
+            }
+          else  if (day.count == 3) {
+                day.color = 'bg-success'
+            }	 

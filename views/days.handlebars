@@ -1,54 +1,111 @@
-<div class="row center">
+<div class="row center ">
 
-<div class="center">
-<h1 >WAITERS LIST</h1>
+  <div class="center">
+    <h1>WAITERS SHIFTS </h1>
 
-
-<div>
-
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th scope="col">#</th>
-			<th scope="col">Name</th>
-			<th scope="col">Day of Booking</th>
-			<th scope="col">Time for Booking</th>
-			<th scope="col">Ticket Number</th>
-
-		</tr>
-	</thead>
-	<tbody>
-		{{#each bookings}}
-		<tr>
-			<th scope="row">{{id}}</th>
-			<td>{{this.name}}</td>
-			<td>{{this.day}}</td>
-			<td>{{this.timeOfGreets}}</td>
-			<td>
-				<a class="btn btn-primary" href="/confirm/{{id}}">View</a>
-			</td>
-		</tr>
-		{{/each}}
-
-	</tbody>
-</table>
+    <div>
+      <div class="d-inline p-2 bg-white text-dark">1 working</div>
+      <div class="d-inline p-2 bg-primary text-white">2 working</div>
+      <div class="d-inline p-2 bg-secondary text-white">3 working</div>
+      <div class="d-inline p-2 bg-dark text-white">4 working</div>
+      <div class="d-inline p-2 bg-success text-white">5 working</div>
+      <div class="d-inline p-2 bg-warning text-white">6 working</div>
+      <div class="d-inline p-2 bg-danger text-white">7 working</div>
 
 
+    </div>
+
+    <div>
+
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
+          <div class="d-flex w-100 justify-content-between">
+            <h4 class="mb-3">Sunday</h4>
+            <small>WAITERS LIST</small>
+          </div>
+          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+          </p>
+          <small>Donec id elit non mi porta.</small>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h4 class="mb-3">Monday</h4>
+            <small class="text-muted">WAITERS LIST</small>
+          </div>
+          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+          </p>
+          <small class="text-muted">Donec id elit non mi porta.</small>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h4 class="mb-3">Tuesday</h4>
+            <small class="text-muted">WAITERS LIST</small>
+          </div>
+          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+          </p>
+          <small class="text-muted">Donec id elit non mi porta.</small>
+        </a>
+
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h4 class="mb-3">Wednesday</h4>
+            <small class="text-muted">WAITERS LIST</small>
+          </div>
+          <p class="mb-3">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+          </p>
+          <small class="text-muted">Donec id elit non mi porta.</small>
+        </a>
+
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h4 class="mb-3">Thursday</h4>
+            <small class="text-muted">WAITERS LIST</small>
+          </div>
+          <p class="mb-3">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+          </p>
+          <small class="text-muted">Donec id elit non mi porta.</small>
+        </a>
+
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h4 class="mb-3">Friday</h4>
+            <small class="text-muted">WAITERS LIST</small>
+          </div>
+          <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+          </p>
+          <small class="text-muted">Donec id elit non mi porta.</small>
+        </a>
+
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h4 class="mb-3">Saturday</h4>
+            <small class="text-muted">WAITERS LIST</small>
+          </div>
+          <p class="mb-3">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.
+          </p>
+          <small class="text-muted">Donec id elit non mi porta.</small>
+        </a>
 
 
 
-</div>
+
+      </div>
 
 
 
-<div>
 
-{{!-- {{#each name}}
+
+    </div>
+
+
+
+    {{!-- {{#each name}}
 <a href="/counter/{{this.name}}">
     <li>{{this.name}}</li>
 </a>
 {{/each}} --}}
 
+  </div>
 </div>
-
+<button class='back' type="button" name="link"><a href="/">Back</a></button>
 <button class='back' type="button" name="link"><a href="/">Back</a></button>
