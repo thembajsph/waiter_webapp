@@ -1,0 +1,14 @@
+language: node_js
+
+env:
+  - DATABASE_URL=postgresql://postgres@localhost:5432/waiters_tests
+
+node_js:  
+  - "12.19.0"
+
+before_script:
+  - psql -c 'create database  waiters_tests;' -U postgres
+  - psql -U postgres -d waiters_tests -a -f tables.sql
+
+services:
+  - postgresql
