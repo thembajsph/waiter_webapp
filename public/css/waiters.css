@@ -42,9 +42,80 @@
 
 
  .big-banner {
-background-image: url('../waiterfoto/self-serve-coffee-shop.jpg');
+background-image: url('/https://burst.shopify.com/photos/espresso-machine-pours-out-hot-and-fresh-shot?q=cafe');
 
 
 
 
    }
+
+   .blue{
+       background-color: blue;
+   }
+   .lightgreen{
+       background-color:lightgreen;
+   }
+   .grey{
+    background-color: grey;
+}
+
+.red{
+background-color: red;
+
+}
+.white {
+
+    background-color: white;
+}
+.orange {
+
+background-color: orange;
+}
+
+.skyblue{
+
+    background-color: skyblue;
+}
+
+
+
+
+
+
+
+
+   /* li{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;  
+
+
+   } */
+
+   /* table{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;    
+   } */
+
+   /* button{
+
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;     */
+
+
+   
+
+   .big-banner{
+       background: url('/https://burst.shopify.com/photos/espresso-machine-pours-out-hot-and-fresh-shot?q=cafe') no-repeat   center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+
+}

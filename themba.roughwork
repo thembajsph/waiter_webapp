@@ -630,25 +630,19 @@ module.exports = function waiters(pool) {
 
     }
 
-
-   
-	<form action="/days" method="get">
 	<div class="row">
 	<table class=" table table-bordered text-light">
 		<thead>
 
 			<tr scope="col-3">
-				{{!-- {{#if}} --}}
+			
 
-				{{#each days}}
+				{{#each weekDays}}
 
-{{!-- 
-{{#each counter}} --}}
 
-{{!-- {{#each waiterCount}} --}}
 				<th scope="col" class={{this.color}}> 
 	
-					{{this.dayname}}
+					{{this.days_bookings}}
 
 				
 					{{/each}}
@@ -661,11 +655,13 @@ module.exports = function waiters(pool) {
 		<tbody>
 			<tr>
 
-				{{#each days}}
+				{{#each allNames}}
 
 				<td scope="col">
-					{{#each waiters}}
-					<li>{{this.name}}</li>
+
+          {{!-- names only --}}
+					{{#each allnames}}
+					<li>{{this.names}}</li>
 
 					{{/each}}
 
@@ -678,7 +674,9 @@ module.exports = function waiters(pool) {
 		</tbody>
 
 	</table>
-	</div>
+	
+   
+
 
 
 

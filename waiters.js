@@ -143,7 +143,37 @@ module.exports = function waiters(pool) {
             shift.forEach(waiter => {
                 if (day.days_bookings === waiter.days_bookings) {
                     day.waiters.push(waiter)
+                }  if (day.waiters.length === 1) {
+
+                    day.color = "white"
                 }
+               else if (day.waiters.length === 2) {
+
+                    day.color = "blue"
+                }
+                else if (day.waiters.length === 3) {
+
+                    day.color = "grey"
+                }
+                else if (day.waiters.length === 4) {
+
+                    day.color = "skyblue"
+
+                }
+                else if (day.waiters.length === 5) {
+
+                    day.color = "lightgreen"
+                }
+                else if (day.waiters.length === 6) {
+
+                    day.color = "yellow"
+                }
+
+                else {
+                    day.color = "red"
+                }
+
+
             });
 
 
@@ -178,16 +208,36 @@ module.exports = function waiters(pool) {
 
 
 
-    async function checkedDay() {
+    //     async function waitersCountColoured(waiters, days) {
+    //         await listOfDaysAndNamesObject();
+
+    //         if (waiters == 1) {
+    //             await listOfDaysAndNamesObject();
+    //             return colour = blue
+    //         } else
+    //             if (waiters == 2)
+
+    //                 return Colour === green
+
+    //             else
+    //                 if (waiters == 3) {
+
+    //                     return colour === yellow
+
+    //                 } else if (waiters == 4) {
+
+    //                     return colour === orange
+
+    //                 } else if (waiter === 5) {
+
+    //                     return  colour === red
+    //                 } else return colour === white
+
+    //     }
+
+    // }
 
 
-
-
-
-
-
-
-    }
 
     async function resetFtn() {
 

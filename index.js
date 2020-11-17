@@ -28,13 +28,7 @@ app.use(session({
 // initialise the flash middleware
 app.use(flash());
 
-
-
-
-// //const routesFactory = routes(registrations)
-
 const instance = waiters(pool);
-
 
 // const greetings = greet(pool);
 // const routesFact = routes(greetings)
@@ -64,11 +58,9 @@ app.get("/", async function (req, res) {
 
   try {
 
-
     res.render("home", {
 
       title: "Home"
-
 
     });
 
@@ -79,12 +71,17 @@ app.get("/", async function (req, res) {
 
   }
 
-
 });
 
+// you will need to render weekDays with every route associated with it.
 app.get("/waiters", async function (req, res) {
 
+  const dayOfWeeks = await instance.dayTogether();
+  // console.log(dayOfWeeks)
+
   res.render("index", {
+
+    weekDays: dayOfWeeks,
 
   })
 });
@@ -94,17 +91,16 @@ app.get("/waiters/:userName", async function (req, res) {
 
 
   try {
-    const userName = await req.params.userName;
-   // console.log(userName)
+    const userName = req.params.userName;
+    // console.log(userName)
+    const dayOfWeeks = await instance.dayTogether();
 
-  
-    //const waiterNames = await instance.createShift(userName)
-    // const daysSelect = await instance.daysSelected()
+
 
     res.render("index", {
 
       userName,
-     
+      weekDays: dayOfWeeks,
 
     });
 
@@ -118,29 +114,30 @@ app.get("/waiters/:userName", async function (req, res) {
 
 
 });
-
 
 app.post("/waiters/:userName", async function (req, res) {
 
   try {
-    const { days, userName } = await req.body;
-    //const userName = await req.params.userName;
-  
-    //console.log({ userName });
+    const { days } = await req.body;
+    const userName = req.params.userName;
 
-    //console.log({ days });
+    console.log({ userName });
+
+    console.log({ days });
 
     // check if name and days are defined
 
     const results = await instance.wf(userName, days);
-    //console.log({ results });
-    const dayOfWeeks = await instance.dayTogether( days);
-console.log(dayOfWeeks)
+    console.log({ results });
+    const dayOfWeeks = await instance.dayTogether();
+
+
 
     res.render("index", {
-
+      //copy userName from get req.params.userName, render userName , then in index.handlebars {{userName}} = sender it dynamically
+      userName,
       allNames: results,
-      weekDays: dayOfWeeks
+      weekDays: dayOfWeeks,
 
     });
 
@@ -150,60 +147,53 @@ console.log(dayOfWeeks)
     console.log(error.message);
     console.log(error.stack);
 
-
   }
-
-
 
 });
 
 
-  app.get("/days", async function (req, res) {
+app.get("/days", async function (req, res) {
 
-    try {
+  try {
 
-      // //want to send the call and sms to my factort function
-      // settingsBill.recordAction(req.body.actionType);
-    const listOfNames = await  instance.listOfDaysAndNamesObject();
-    
-   console.log(listOfNames[1].waiters)
-      res.render("days", { 
+    const listOfNames = await instance.listOfDaysAndNamesObject();
 
-       list: listOfNames,
-      
+    console.log(listOfNames)
 
-        // actions: actionLists2 
+    res.render("days", {
 
-      });
+      list: listOfNames
 
-    } catch (error) {
-      console.log(error.name);
-      console.log(error.message);
-      console.log(error.stack);
-    }
+    });
+
+  } catch (error) {
+    console.log(error.name);
+    console.log(error.message);
+    console.log(error.stack);
+  }
 
 
-  });
+});
 
-  app.get("/reset", async function (req, res) {
+app.get("/reset", async function (req, res) {
 
-    try {
+  try {
 
-      res.redirect("/days")
+    res.redirect("/days")
 
-    } catch (error) {
-      console.log(error.name);
-      console.log(error.message);
-      console.log(error.stack);
+  } catch (error) {
+    console.log(error.name);
+    console.log(error.message);
+    console.log(error.stack);
 
-    }
+  }
 
-  });
+});
 
 
 
 
-const PORT = process.env.PORT || 3046
+const PORT = process.env.PORT || 3047
 
 app.listen(PORT, function () {
   console.log("app started at port:", PORT);
