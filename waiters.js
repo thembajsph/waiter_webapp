@@ -143,7 +143,12 @@ module.exports = function waiters(pool) {
             shift.forEach(waiter => {
                 if (day.days_bookings === waiter.days_bookings) {
                     day.waiters.push(waiter)
-                }  if (day.waiters.length === 1) {
+                }  if (day.waiters.length === 0) {
+
+                    day.color = "lightpink"
+                }
+                
+              else  if (day.waiters.length === 1) {
 
                     day.color = "white"
                 }
