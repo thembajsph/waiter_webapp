@@ -91,17 +91,64 @@ app.get("/waiters/:userName", async function (req, res) {
 
 
   try {
-    const userName = req.params.userName;
-    // console.log(userName)
-    const dayOfWeeks = await instance.dayTogether();
+
+   
 
 
 
+    let userName = req.params.userName;
+
+    userName = userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase();
+    // console.log({ userName });
+    var regex = /^[a-zA-Z]+$/;
+
+
+    if (userName != null && regex.test(userName)) {
+
+    //  console.log(userName)
+    const newId = await instance.getIdOfUser(userName);
+
+    var dayOfWeeks = await instance.dayTogether();
+       console.log(dayOfWeeks);
+    // const listOfNames = await instance.allDayChecked();
+    ///console.log(listOfNames)
+
+
+    const specificUser = await instance.allDaySpecificUser(newId);
+      console.log({ specificUser }  + " asasasasasasasa");
+    //  console.log({specificUser});
+
+
+    // const listOfNames = await allDayChecked();
+    dayOfWeeks.forEach(day => {
+
+        day.state = ''
+
+      specificUser.forEach(waiter => {
+        //  console.log(specificUser)
+        if (waiter.days_bookings === day.days_bookings) {
+
+
+          day.state = 'checked'
+
+            // console.log(day.state)
+        }
+
+      })
+
+          // return specificUser;
+
+    })
+    //  console.log(specificUser);
+
+    //  console.log(dayOfWeeks);
+
+  }
     res.render("index", {
 
       userName,
       weekDays: dayOfWeeks,
-
+      // list: listOfNames
     });
 
   } catch (error) {
@@ -115,23 +162,54 @@ app.get("/waiters/:userName", async function (req, res) {
 
 });
 
+// async function waitersDays(x) {
+//   const lists = await pool.query(`select weekdays_name from shifts where waiters_name = $1`, [x])
+//   var lst = lists.rows
+
+//   var dai = await pool.query(`select * from weekdays`)
+//   var day = dai.rows;
+
+//   day.forEach(allDays => {
+//       lst.forEach(WaiterDays => {
+//           if (WaiterDays.weekdays_name === allDays.weekdays) {
+//               allDays.state = "checked"
+//           }
+//       })
+//   })
+//   return day
+// }
+
+
 app.post("/waiters/:userName", async function (req, res) {
 
   try {
+
     const { days } = await req.body;
-    const userName = req.params.userName;
+    let userName = req.params.userName;
 
-    console.log({ userName });
+    userName = userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase();
+    // console.log({ userName });
+    var regex = /^[a-zA-Z]+$/;
 
-    console.log({ days });
+    //  if (userName === null) {
+    //    req.flash("info", "enter your name")
 
-    // check if name and days are defined
+    //  }
+    if (userName != null && regex.test(userName)) {
+      // console.log({ days });
 
-    const results = await instance.wf(userName, days);
-    console.log({ results });
-    const dayOfWeeks = await instance.dayTogether();
+      // check if name and days are defined
 
+      results = await instance.wf(userName, days);
+      //console.log({ results });
+      dayOfWeeks = await instance.dayTogether();
+      
 
+       const flashMsg = await instance.buttonMessage();
+
+       req.flash('regexMes', flashMsg);
+
+    }
 
     res.render("index", {
       //copy userName from get req.params.userName, render userName , then in index.handlebars {{userName}} = sender it dynamically
@@ -158,7 +236,7 @@ app.get("/days", async function (req, res) {
 
     const listOfNames = await instance.listOfDaysAndNamesObject();
 
-    console.log(listOfNames)
+    //console.log(listOfNames)
 
     res.render("days", {
 
@@ -177,6 +255,16 @@ app.get("/days", async function (req, res) {
 
 app.get("/reset", async function (req, res) {
 
+  // let regTown = req.body.regNumbers
+
+  let clearDb = await instance.buttonMsg()
+
+  req.flash("clear", clearDb);
+
+  await instance.resetFtn()
+
+
+
   try {
 
     res.redirect("/days")
@@ -193,7 +281,8 @@ app.get("/reset", async function (req, res) {
 
 
 
-const PORT = process.env.PORT || 3047
+const PORT = process.env.PORT || 3048
+
 
 app.listen(PORT, function () {
   console.log("app started at port:", PORT);

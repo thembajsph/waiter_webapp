@@ -52,15 +52,15 @@ background-image: url('/https://burst.shopify.com/photos/espresso-machine-pours-
    .blue{
        background-color: blue;
    }
-   .lightgreen{
-       background-color:lightgreen;
+   .lime{
+       background-color:lime;
    }
    .grey{
     background-color: grey;
 }
 
 .red{
-background-color: red;
+background-color:red;
 
 }
 .white {
@@ -82,20 +82,23 @@ background-color: orange;
     background-color: lightpink;
 }
 
+table, th, td {
+    border: 1px solid black;
+  }
 
 
 
 
+    ul{
 
-   /* li{
-
-    display: block;
+list-style: none;
+    /* display: block;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;  
+    width: 50%;   */
 
 
-   } */
+   } 
 
    /* table{
     display: block;
@@ -120,5 +123,24 @@ background-color: orange;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+
+}
+
+.clearWaiters{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; 
+    color: red; 
+
+}
+
+.regy{
+    /* display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;  */
+    color: green;
+
 
 }

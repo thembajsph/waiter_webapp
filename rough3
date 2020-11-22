@@ -1,0 +1,52 @@
+   const allDays = await dayTogether();
+        const userIdentity = getIdOfUser(name);
+        const specificNameShifts = await allDaySpecificUser(name);
+
+
+        // const rowsOfDays = allDays.rows;
+
+        await allDays.forEach(async (day) => {
+            day.waiters = [];
+
+            day.checked = "";
+
+            specificNameShifts.forEach(async (waiters) => {
+
+                if (day.days_bookings === waiters.days_bookings) {
+
+                    day.checked = "checked"
+                }
+
+            })
+
+        })
+
+
+
+       select days_bookings from waiters_shifts 
+--   join waiters_shifts   
+--     on waiters_shifts.waiters_id = waiters_names.id 
+--   join  weekly_days
+--  on waiters_shifts.days_id = weekly_days.id
+--   where waitersly_days.id=1
+
+
+-- select * from waiters_shifts join weekly_days on waiters_shifts.days_id = weekly_days.id join waiters_names on waiters_shifts.waiters_id = waiters_names.id;
+
+
+-- 
+
+
+
+
+
+-- select days_bookings from waiters_shifts join waiters_names on waiters_shifts.waiters_id = waiters_names.id join weekly_days on waiters_shifts.days_id = weekly_days.id;
+-- waiters-database=> select days_bookings from waiters_shifts join waiters_names on waiters_shifts.waiters_id = waiters_names.id join weekly_days on waiters_shifts.days_id = weekly_days.id where names='hloni';
+
+-- select waiters_names.names as name from waiters_names
+--  join waiters_shifts   
+--    on waiters_shifts.waiters_id = waiters_names.id
+--  join  weekly_days
+--  on waiters_shifts.days_id = weekly_days.id
+--  where weekly_days.id=1
+

@@ -3,7 +3,12 @@
   <div class="center">
     <h1>WAITERS SHIFTS </h1>
 
+    <span class="clearWaiters center col-3" id="errorMsg"> {{messages.clear}}{{userName}}
+    </span>
 
+
+
+    {{!-- <hr class="my-4"> --}}
 
     <div>
       {{!-- {{#each   list}}
@@ -32,7 +37,7 @@
               {{#each list}}
 
 
-              <th style="background-color: {{this.color}};" >
+              <th style="background-color: {{this.color}};">
 
                 {{this.days_bookings}}
 
@@ -54,9 +59,9 @@
                 {{!-- names only --}}
                 {{#each waiters}}
 
-                {{!-- <ol> --}}
-                  <li>{{this.names}}</li>
-                {{!-- </ol> --}}
+                 <ul class="text-left"> -
+                <li>{{this.names}}</li>
+                 </ul>
                 {{/each}}
 
               </td>
@@ -78,13 +83,15 @@
 
       </div>
       <div>
-        <div class="d-inline p-2 bg-white text-dark">1 working</div>
+        {{!-- <div class="d-inline p-2 bg-white text-dark">1 working</div>
         <div class="d-inline p-2 bg-primary text-white">2 working</div>
         <div class="d-inline p-2 bg-secondary text-white">3 working</div>
-        <div class="d-inline p-2 bg-info text-white">4 working</div>
-        <div class="d-inline p-2 bg-success text-white">5 working</div>
-        <div class="d-inline p-2 bg-warning text-white">6 working</div>
-        <div class="d-inline p-2 bg-danger text-white">7 or more </div>
+        <div class="d-inline p-2 bg-info text-white">4 working</div> --}}
+
+
+        <div class="d-inline p-2 bg-warning text-white">more waiters required</div>
+        <div class="d-inline p-2 bg-success text-white"> enough waiters added</div>
+        <div class="d-inline p-2 bg-danger text-white">over subscribed</div>
 
 
       </div>
@@ -99,4 +106,16 @@
   </div>
 </div>
 <button class='back' type="button" name="link"><a href="/">Back</a></button>
-<button class='back' type="button" name="link"><a href="/">Back</a></button>
+  <a href="/reset"> <button class="clearBtn" type="submit" name="button">clear Btn</button> </a>
+
+ <script>
+
+
+    setTimeout(function () {
+
+        document.querySelector(".clearWaiters").innerHTML = "";
+       
+
+    }, 3000);
+
+</script> 

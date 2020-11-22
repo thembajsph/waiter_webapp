@@ -109,12 +109,41 @@ module.exports = function waiters(pool) {
 
     };
 
-    async function allDayChecked() {
 
-        // - query * days selected return their ids with state: disable
+    async function allDaySpecificUser(id) {
+        //console.log(name)
+        //   const idFunction = await  searchUser()
+
+        const selectIdQ = await pool.query(`select weekly_days.days_bookings from weekly_days 
+        join waiters_shifts
+         on  waiters_shifts.days_id = weekly_days.id 
+         join waiters_names
+         on  waiters_shifts.waiters_id = waiters_names.id where waiters_id = $1`, [id])
+        //  console.log(selectIdQ.rows);
         // *  - {name: Thur, id: 5, state: checked}
-
+        return selectIdQ.rows;
     };
+
+
+
+
+
+
+
+
+
+
+
+    async function checkedUpdate(name) {
+
+
+    }
+
+
+
+
+
+
 
 
 
@@ -139,42 +168,31 @@ module.exports = function waiters(pool) {
         //console.log(daysRow)
 
         weekdays.forEach(async function (day) {
-            day.waiters = [];
-            shift.forEach(waiter => {
-                if (day.days_bookings === waiter.days_bookings) {
-                    day.waiters.push(waiter)
-                }  if (day.waiters.length === 0) {
 
-                    day.color = "lightpink"
-                }
-                
-              else  if (day.waiters.length === 1) {
+            day.waiters = [];
+
+            shift.forEach(waiter => {
+
+                if (day.days_bookings === waiter.days_bookings) {
+
+                    day.waiters.push(waiter)
+
+                } if (day.waiters.length === 0) {
 
                     day.color = "white"
                 }
-               else if (day.waiters.length === 2) {
 
-                    day.color = "blue"
-                }
-                else if (day.waiters.length === 3) {
-
-                    day.color = "grey"
-                }
-                else if (day.waiters.length === 4) {
-
-                    day.color = "skyblue"
-
-                }
-                else if (day.waiters.length === 5) {
-
-                    day.color = "lightgreen"
-                }
-                else if (day.waiters.length === 6) {
+                else if (day.waiters.length < 3) {
 
                     day.color = "yellow"
                 }
 
+                else if (day.waiters.length >= 3 && day.waiters.length <= 4) {
+
+                    day.color = "lime"
+                }
                 else {
+
                     day.color = "red"
                 }
 
@@ -199,55 +217,12 @@ module.exports = function waiters(pool) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    //     async function waitersCountColoured(waiters, days) {
-    //         await listOfDaysAndNamesObject();
-
-    //         if (waiters == 1) {
-    //             await listOfDaysAndNamesObject();
-    //             return colour = blue
-    //         } else
-    //             if (waiters == 2)
-
-    //                 return Colour === green
-
-    //             else
-    //                 if (waiters == 3) {
-
-    //                     return colour === yellow
-
-    //                 } else if (waiters == 4) {
-
-    //                     return colour === orange
-
-    //                 } else if (waiter === 5) {
-
-    //                     return  colour === red
-    //                 } else return colour === white
-
-    //     }
-
-    // }
-
-
-
     async function resetFtn() {
 
+        // console.log(userName)
+        const dayOfWeeks = await dayTogether();
         //delete from joined table
-        let restart = await pool.query('DELETE FROM foreign_keys');
+        let restart = await pool.query('DELETE FROM waiters_shifts');
 
         return restart;
     };
@@ -261,6 +236,8 @@ module.exports = function waiters(pool) {
             await resetFtn();
 
             return "database has be cleared...!"
+            // console.log(userName)
+            const dayOfWeeks = await instance.dayTogether();
         }
 
     };
@@ -274,6 +251,28 @@ module.exports = function waiters(pool) {
 
     };
 
+
+
+
+    
+
+    async function buttonMessage() {
+
+        var buttonpressed = false;
+
+        if (!buttonpressed) {
+
+      return  "registration number already exists... try again!"
+
+        }
+
+    };
+
+
+
+
+
+
     return {
 
         searchUser,
@@ -282,7 +281,7 @@ module.exports = function waiters(pool) {
         getAllShift,
         insertNewNameId,
         insertNewDaysId,
-        allDayChecked,
+        buttonMessage,
         waitersDayOneDay,
         resetFtn,
         buttonMsg,
@@ -291,7 +290,10 @@ module.exports = function waiters(pool) {
         addUser,
         addNewShift,
         listOfDaysAndNamesObject,
-        dayTogether
+        dayTogether,
+        // regexMsg,
+        checkedUpdate,
+        allDaySpecificUser,
     }
 
 };

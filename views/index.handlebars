@@ -1,7 +1,7 @@
-<header class="jumbotronf " style="background-image: url('./home/downloads/self-serve-coffee-shop.jpg');">
+<header class="jumbotronf">
 
 
-
+	{{!-- style="background-image: url('./home/downloads/self-serve-coffee-shop.jpg'); --}}
 
 
 
@@ -30,22 +30,29 @@
 						class="form-control {{bookingNameInvalid.style}}" id="formGroupExampleInput"
 						placeholder="enter name" {{name}} <input type="hidden" name="name" value="{{name}}"> --}}
 
-					<div id="" class="invalid-feedback">
-						{{!-- Please provide a number of days. --}}
-						{{bookingsNameInvalid.message}}
-					</div>
+
+					{{!-- <span class="infom center col-3" id="errorMsg"> {{messages.info}}
+					</span> --}}
+
+
+
+
+
 				</div>
 				{{!-- {{/each}} --}}
 
 				<div>
 
- {{#each weekDays}}
-					<input type="checkbox" name="days" value="{{this.id}}" class="form-check"
-						aria-label="Checkbox for following text input" >
+					{{#each weekDays}}
+					<input type="checkbox" name="days" value="{{this.id}}" class="form-check" {{this.state}}
+						aria-label="Checkbox for following text input">
 
 					<span> {{days_bookings}} </span>
 
-{{/each}}  
+					{{/each}}
+
+					<h2><span class="regy center col-3" id="errorMsg"> {{messages.regexMes}}
+						</span></h2>
 
 
 					{{!-- <div class="form-check form-check-inline center">
@@ -86,7 +93,7 @@
 		</div>
 		</form>
 
-
+	
 
 
 
@@ -148,3 +155,19 @@
 
 
 <button class="index"><a href="/">Take me home</a></button>
+
+
+
+
+
+<script>
+
+
+	setTimeout(function () {
+
+		
+		document.querySelector(".regy").innerHTML = "";
+
+	}, 5000);
+
+</script>

@@ -150,3 +150,45 @@
 <p class="text-white bg-dark">.text-white</p>
 <p class="text-black-50">.text-black-50</p>
 <p class="text-white-50 bg-dark">.text-white-50</p>
+
+
+//     async function waitersCountColoured(waiters, days) {
+    //         await listOfDaysAndNamesObject();
+
+    //         if (waiters == 1) {
+    //             await listOfDaysAndNamesObject();
+    //             return colour = blue
+    //         } else
+    //             if (waiters == 2)
+
+    //                 return Colour === green
+
+    //             else
+    //                 if (waiters == 3) {
+
+    //                     return colour === yellow
+
+    //                 } else if (waiters == 4) {
+
+    //                     return colour === orange
+
+    //                 } else if (waiter === 5) {
+
+    //                     return  colour === red
+    //                 } else return colour === white
+
+    //     }
+
+    // }
+
+
+     select days_bookings from waiters_shifts 
+    join waiters_names
+     on waiters_shifts.waiters_id = waiters_names.id join weekly_days 
+     on waiters_shifts.days_id = weekly_days.id where names=$1`, [name])
+
+
+select days_bookings from waiters_shifts 
+    join waiters_names
+     on waiters_shifts.waiters_id = waiters_names.id join weekly_days 
+     on waiters_shifts.days_id = weekly_days.id where names='hloni';
