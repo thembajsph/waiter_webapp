@@ -21,9 +21,8 @@
     "mocha": "^8.2.1"
   },
   "scripts": {
-    "test": "mocha" ,
- "start": "node index.js"
-
+    "test": "mocha",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

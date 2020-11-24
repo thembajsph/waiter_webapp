@@ -50,3 +50,85 @@
 --  on waiters_shifts.days_id = weekly_days.id
 --  where weekly_days.id=1
 
+// async function waitersDays(x) {
+//   const lists = await pool.query(`select weekdays_name from shifts where waiters_name = $1`, [x])
+//   var lst = lists.rows
+
+//   var dai = await pool.query(`select * from weekdays`)
+//   var day = dai.rows;
+
+//   day.forEach(allDays => {
+//       lst.forEach(WaiterDays => {
+//           if (WaiterDays.weekdays_name === allDays.weekdays) {
+//               allDays.state = "checked"
+//           }
+//       })
+//   })
+//   return day
+// }
+
+// const newName = req.params.userName;
+
+//         var names = await greetings.getName()
+//         // console.log(names + "zxcvbnasdfghdfg")
+//         if (newName != null) {
+
+//             await greetings.enterName(newName)
+
+//         }
+
+
+
+// async function filteredTownsOptions(id) {
+
+//   if (id === "all") {
+
+//       let allRegistrations = await pool.query("SELECT reg_numbers FROM foreign_keys");
+
+//       return allRegistrations.rows
+//   }
+//   else {
+
+//       const regId = await pool.query("SELECT reg_numbers FROM foreign_keys WHERE  town_id = ($1)", [id])
+//       //console.log(regId.rows)
+//       return regId.rows
+//   }
+// };
+
+
+
+  // //using a foreach loop
+    // let value
+
+    // days.forEach((value, index) => {
+
+
+
+    //   console.log(index, value)
+
+    // req.flash('reset', 'Week succe reset')
+    // });
+    // const storeAway = instance.createShift(userName, value)
+
+  {{!-- {{#each   list}}
+      <div class="list-group">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start ">
+          <div class="d-flex w-100 justify-content-between">
+            <h4 class="mb-3">{{this.days_bookings}}</h4>
+            <small>WAITERS LIST</small>
+          </div>
+          <p class="mb-1">	{{#each waiters}}
+					<li>{{this.names}}</li>
+
+					{{/each}}
+          </p>
+         
+</a>
+   {{/each}}  --}}
+
+
+
+    {{!-- <hr class="my-4"> --}}
+     //     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
+    // ];
+ 

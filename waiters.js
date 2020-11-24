@@ -35,7 +35,6 @@ module.exports = function waiters(pool) {
         //return get all shift with all the shifts in a table
         return await getAllShift();
 
-
     };
 
     async function searchUser(name) {
@@ -71,7 +70,6 @@ module.exports = function waiters(pool) {
 
     };
 
-
     async function insertNewDaysId(days_id, names_id) {
 
         await pool.query('INSERT INTO waiters_shifts (days_id, waiters_id) values ($1,$2)', [days_id, names_id])
@@ -86,7 +84,6 @@ module.exports = function waiters(pool) {
      * @returns nothing
      */
 
-
     async function addNewShift(days_id, names_id) {
         // console.log(days_id);
 
@@ -95,7 +92,6 @@ module.exports = function waiters(pool) {
         await days_id.forEach(async (id) => {
 
             await insertNewDaysId(id, names_id)
-
 
         });
 
@@ -109,8 +105,9 @@ module.exports = function waiters(pool) {
 
     };
 
-
     async function allDaySpecificUser(id) {
+        // *  - should return an object ----{name: Thur, id: 5, state: checked}
+
         //console.log(name)
         //   const idFunction = await  searchUser()
 
@@ -120,32 +117,9 @@ module.exports = function waiters(pool) {
          join waiters_names
          on  waiters_shifts.waiters_id = waiters_names.id where waiters_id = $1`, [id])
         //  console.log(selectIdQ.rows);
-        // *  - {name: Thur, id: 5, state: checked}
+
         return selectIdQ.rows;
     };
-
-
-
-
-
-
-
-
-
-
-
-    async function checkedUpdate(name) {
-
-
-    }
-
-
-
-
-
-
-
-
 
     async function waitersDayOneDay() {
 
@@ -206,7 +180,6 @@ module.exports = function waiters(pool) {
 
     }
 
-
     async function dayTogether() {
 
         const results = await pool.query('select * from  weekly_days')
@@ -214,8 +187,6 @@ module.exports = function waiters(pool) {
         return results.rows;
 
     };
-
-
 
     async function resetFtn() {
 
@@ -235,7 +206,7 @@ module.exports = function waiters(pool) {
 
             await resetFtn();
 
-            return "database has be cleared...!"
+            return "database has been cleared...!"
             // console.log(userName)
             const dayOfWeeks = await instance.dayTogether();
         }
@@ -251,27 +222,17 @@ module.exports = function waiters(pool) {
 
     };
 
-
-
-
-    
-
     async function buttonMessage() {
 
         var buttonpressed = false;
 
         if (!buttonpressed) {
 
-      return  "registration number already exists... try again!"
+            return "Dear waiter, your booking has been successfully submited..!"
 
         }
 
     };
-
-
-
-
-
 
     return {
 
@@ -279,8 +240,7 @@ module.exports = function waiters(pool) {
         getIdOfUser,
         deleteAllShift,
         getAllShift,
-        insertNewNameId,
-        insertNewDaysId,
+        insertNewNameId, 
         buttonMessage,
         waitersDayOneDay,
         resetFtn,
@@ -291,8 +251,6 @@ module.exports = function waiters(pool) {
         addNewShift,
         listOfDaysAndNamesObject,
         dayTogether,
-        // regexMsg,
-        checkedUpdate,
         allDaySpecificUser,
     }
 
@@ -300,9 +258,7 @@ module.exports = function waiters(pool) {
 
 
 
-    //     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
-    // ];
-
+  
 
 
 
