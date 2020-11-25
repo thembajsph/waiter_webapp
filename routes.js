@@ -94,7 +94,11 @@ module.exports = function routesFact(instance) {
 
         try {
 
-            const { days } = await req.body;
+            var { days } = await req.body;
+            //this is to select one day because whe you select on day it become a string instead of an array , so this special function does that for you.
+            //checks if its an array if not makes it one.
+            days = Array.isArray(req.body.days) ? req.body.days : [req.body.days];
+
             let userName = req.params.userName;
 
             userName = userName.charAt(0).toUpperCase() + userName.slice(1).toLowerCase();

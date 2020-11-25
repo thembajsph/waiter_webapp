@@ -131,4 +131,49 @@
     {{!-- <hr class="my-4"> --}}
      //     const weekDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
     // ];
- 
+  {{!-- <div class="home-page" style="background-image: url('/img/self-serve-coffee-shop.jpg);"  alt="fake pic2"> --}}
+
+    {{!-- <img src="/img/barista-pours-steamed-milk-on-espresso.jpg" class="img-fluid"
+                    alt="Responsive image">  --}}
+	{{!-- <div class="form-check form-check-inline center">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox1" name="days" value="1">
+						<label class="form-check-label" for="inlineCheckbox1">Monday</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="days" value="2">
+						<label class="form-check-label" for="inlineCheckbox2">Tuesday</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="days" value="3">
+						<label class="form-check-label" for="inlineCheckbox3">Wednesdays</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="days" value="4">
+						<label class="form-check-label" for="inlineCheckbox4">Thursday</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="days" value="5">
+						<label class="form-check-label" for="inlineCheckbox5">Friday</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="days" value="6">
+						<label class="form-check-label" for="inlineCheckbox6">Saturday</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="checkbox" id="inlineCheckbox2" name="days" value="7">
+						<label class="form-check-label" for="inlineCheckbox7">Sunday</label>
+					</div> --}}
+
+
+          				{{!-- <label for="formGroupExampleInput"></label> --}}
+					{{!-- <input type="text" name="userName" value="{{name}}"
+						class="form-control {{bookingNameInvalid.style}}" id="formGroupExampleInput"
+						placeholder="enter name" {{name}} <input type="hidden" name="name" value="{{name}}"> --}}
+
+
+					{{!-- <span class="infom center col-3" id="errorMsg"> {{messages.info}}
+					</span> --}}
+
+
+
+

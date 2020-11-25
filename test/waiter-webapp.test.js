@@ -59,7 +59,7 @@ describe("The waiters webapp", async function () {
 
 	});
 
-	it("should be able to add a new shift and new shift for waiter , days_id and userID ", async function () {
+	it("should be able to add a new shift and new id's for waiter , days_id and userID ", async function () {
 
 		await instance.addUser("Trello");
 
@@ -70,11 +70,11 @@ describe("The waiters webapp", async function () {
 		result1 = await pool.query(`select id from weekly_days where days_bookings  =$1`, ["Tuesday"])
 		var day_id = result1.rows[0].id
 
-		await instance.insertNewDaysId(day_id, waiters_id);
+		await instance.addUser(day_id, waiters_id);
 
 
 		assert.deepEqual[{
-			days_id: 2, waiters_id: 1
+			days_id: 3, waiters_id: 1
 		}], await instance.getAllShift();
 	});
 

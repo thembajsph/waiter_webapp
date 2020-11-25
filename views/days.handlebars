@@ -1,15 +1,12 @@
 <div class="row center big-banner">
 
   <div class="center">
-    <h1>WAITERS SHIFTS </h1>
-
-  <h3> <span class="clearWaiters center col-3" id="errorMsg"> {{messages.clear}}{{userName}}
-    </span></h3> 
-
-
+    <h1 class=""> WAITERS SHIFTS </h1>
+ <p class="eg center">EACH NAME ACTS AS A LINK </p>
+    <h3> <span class="clearWaiters center col-3" id="errorMsg"> {{messages.clear}}{{userName}}
+      </span></h3>
 
     <div>
-    
 
       <div class="row">
         <table class=" table table-bordered text-light">
@@ -43,9 +40,10 @@
                 {{!-- names only --}}
                 {{#each waiters}}
 
-                 <ul class="text-left"> -
-                <li>{{this.names}}</li>
-                 </ul>
+                <ul class="text-left"> 
+              
+                  <li><a href="/waiters/{{this.names}}">{{this.names}}</a></li>
+                </ul>
                 {{/each}}
 
               </td>
@@ -59,19 +57,8 @@
         </table>
 
 
-
-
-
-
-
-
       </div>
       <div>
-        {{!-- <div class="d-inline p-2 bg-white text-dark">1 working</div>
-        <div class="d-inline p-2 bg-primary text-white">2 working</div>
-        <div class="d-inline p-2 bg-secondary text-white">3 working</div>
-        <div class="d-inline p-2 bg-info text-white">4 working</div> --}}
-
 
         <div class="d-inline p-2 bg-warning text-white">more waiters required</div>
         <div class="d-inline p-2 bg-success text-white"> enough waiters added</div>
@@ -83,23 +70,17 @@
 
     </div>
 
-
-
-
-
   </div>
 </div>
-<button class='back' type="button" name="link"><a href="/">Back</a></button>
-  <a href="/reset"> <button class="clearBtn" type="submit" name="button">clear Btn</button> </a>
+{{!-- <button class='back' type="button" name="link"><a href="/waiters">Waiters</a></button> --}}
+<a href="/reset"> <button class="clearBtn" type="submit" name="button">clear</button> </a>
 
- <script>
+<script>
 
+  setTimeout(function () {
 
-    setTimeout(function () {
+    document.querySelector(".clearWaiters").innerHTML = "";
 
-        document.querySelector(".clearWaiters").innerHTML = "";
-       
+  }, 3000);
 
-    }, 3000);
-
-</script> 
+</script>

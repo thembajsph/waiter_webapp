@@ -7,15 +7,6 @@
     
 }
 
-/* .form-control{
-
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%; 
-
-} */
-
  .formGroupExampleInput {
 
     display: block;
@@ -25,26 +16,14 @@
 } 
 
 
-/* .form-check {
-
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;  
-}  */
-
-
 .smith {
     color : white
   }
 
 
 
-
  .big-banner {
 background-image: url('https://burst.shopify.com/photos/espresso-machine-pours-out-hot-and-fresh-shot?q=cafe');
-
-
 
 
    }
@@ -86,36 +65,14 @@ table, th, td {
     border: 1px solid black;
   }
 
-
-
-
     ul{
 
 list-style: none;
-    /* display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;   */
-
+  
 
    } 
 
-   /* table{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;    
-   } */
-
-   /* button{
-
-    /* display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;     */
-
-
-   
+  
 
    .big-banner{
        background: url('/https://burst.shopify.com/photos/espresso-machine-pours-out-hot-and-fresh-shot?q=cafe') no-repeat   center center fixed;
@@ -136,11 +93,26 @@ list-style: none;
 }
 
 .regy{
-    /* display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;  */
+  
     color: green;
 
-
 }
+
+/* body{
+
+ background-image: url('/img/slide-2.jpg'); 
+
+
+
+} */
+
+/* ul{
+
+    list-style: none;
+         display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;   
+    
+    
+       }  */
