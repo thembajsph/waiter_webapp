@@ -122,7 +122,7 @@ module.exports = function routesFact(instance) {
                 req.flash('regexMes', flashMsg);
 
             }
-            res.redirect(`/waiters/${userName}`);
+           // res.redirect(`/waiters/${userName}`);
 
             res.render("index", {
                 //copy userName from get req.params.userName, render userName , then in index.handlebars {{userName}} = sender it dynamically
