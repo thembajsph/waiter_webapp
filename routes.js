@@ -118,6 +118,7 @@ module.exports = function routesFact(instance) {
                 const flashMsg = await instance.buttonMessage();
 
                 req.flash('regexMes', flashMsg);
+                
 
             }
 

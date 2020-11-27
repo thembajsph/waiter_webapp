@@ -156,12 +156,12 @@ module.exports = function waiters(pool) {
                     day.color = "white"
                 }
 
-                else if (day.waiters.length < 3) {
+                else if (day.waiters.length <= 2) {
 
                     day.color = "yellow"
                 }
 
-                else if (day.waiters.length >= 3 && day.waiters.length <= 4) {
+                else if (day.waiters.length >= 2 && day.waiters.length <= 3) {
 
                     day.color = "lime"
                 }

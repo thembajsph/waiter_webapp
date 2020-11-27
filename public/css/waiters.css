@@ -112,6 +112,23 @@ color: lightseagreen
 
   }
 
+.tello{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%; 
+
+
+}
+
+
+
+
+
+
+  
+
 /* body{
 
  background-image: url('/img/slide-2.jpg'); 

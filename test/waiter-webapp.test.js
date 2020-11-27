@@ -16,18 +16,11 @@ describe("The waiters webapp", async function () {
 		await pool.query("delete from waiters_shifts");
 		await pool.query("delete from waiters_names");
 
-		// await pool.query("create table waiters_shifts(
-		// 	id serial not null primary key,
-		// 	days_id int not null,
-		// 	waiters_id int not null, 
-		// 	foreign key (days_id ) references weekly_days (id),
-		// 	foreign key (waiters_id) references waiters_names (id)
-		// "");	
-
+	
 	});
 
 	it("should be able to add a new waiter's name", async function () {
-		// let instance = waiters(pool);
+		
 		await instance.addUser("Themba");
 		await instance.addUser("Sipho");
 		await instance.addUser("Tello");
@@ -90,148 +83,6 @@ describe("The waiters webapp", async function () {
 		}, { days_id: 4, waiters_id: 2 }, { days_id: 7, waiters_id: 1, days_id: 5, waiters_id: 3 }], await instance.
 			getAllShift();
 	});
-
-
-
-
-
-
-
-	// 	assert.deepEqual[{
-	// 		days_id: 2, waiters_id: 1,
-	// 		days_id: 3, waiters_id: 1, days_id: 5, waiters_id: 1
-	// 	}], await instance.getAllShift();
-	// });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// it("should be able to use flash and return a message if the input is valid", async function () {
-
-	//     // await instance.storeData("CY 456 789");
-
-	//     assert.equal("registration successfully added", await instance.errorGreen('CY 456 789'));
-
-	// });
-
-
-
-
-	// it("should be able to add a greet", async function () {
-
-
-	// 	await instance.enterName("Themba");
-	// 	await instance.enterName("Sipho");
-	// 	await instance.enterName("Tello");
-
-	// 	assert.deepEqual[{ name: "Themba" }, { name: "Sipho" }, { name: "Tello" }], await instance.
-	// 		getName();
-
-	// });
-
-	// it("should be able set the name of the user and get overall counter", async function () {
-	// 	// let instance = greetings(pool);
-	// 	await instance.enterName("Themba");
-
-	// 	assert.equal(await instance.overallCounter(), 1);
-
-	// });
-
-	// it("should be able take in a different language and return message", async function () {
-
-
-	// 	var message = await instance.language("Isixhosa", "Themba");
-	// 	var message2 = await instance.language("English", "Themba");
-	// 	var message3 = await instance.language("Afrikaans", "Sipho");
-
-
-	// 	assert.equal(message, "Molo, Themba" + " !");
-	// 	assert.equal(message2, "Hello, Themba" + " !");
-	// 	assert.equal(message3, "Hallo, Sipho" + " !");
-
-	// });
-
-
-	// it("should be able check if no name is updated and return undefined or empty", async function () {
-
-	// 	let instance = greetings(pool);
-
-	// 	assert.equal(undefined, await instance.getCountForUser('sipho'));
-
-	// });
-
-	// it("should be able check count for specific  user", async function () {
-
-	// 	let instance = greetings(pool);
-
-	// 	//await instance.existDbAndCount();
-
-	// 	await instance.enterName("Thabie");
-	// 	await instance.enterName("zweli");
-
-	// 	assert.deepEqual(await instance.getCountForUser("zweli"), 1);
-
-	// });
-
-
-	// 	it("should be able to reset the counter back to zero", async function () {
-
-	// 		let instance = greetings(pool);
-
-
-	// 		await instance.enterName("Hloni");
-	// 		await instance.enterName("Tau");
-
-	// await instance.resetFtn()
-	// 		assert.deepEqual([], await instance.getName() );
-
-	// 	});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
